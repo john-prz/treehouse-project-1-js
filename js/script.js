@@ -47,37 +47,6 @@ var quotes = [
 
 /*************************function declarations****************************/
 
-//Generate a random quote from the quotes array using the length of the array
-function getRandomQuote () {
-  var randomNum = Math.floor(Math.random() * quotes.length);
-  return quotes[randomNum];
-}
-
-//Display a random quote on screen
-function printQuote() {
-  //retrieve random quote object from quotes array
-  var randomQuote = getRandomQuote();
-  //begin buidling html string
-  var innerHTML = "<p class=\"quote\">";
-
-  //continue building HTML string
-  innerHTML += randomQuote.quote + "</p>";
-  innerHTML += "<p class=\"source\">" + randomQuote.source;
-
-  //use conditionals to revent null properties from displaying on screen
-  if(randomQuote.citation !== null && randomQuote.citation !== undefined){
-    innerHTML += "<span class=\"citation\">" + randomQuote.citation + "</span>";
-  }
-  if(randomQuote.year !== null && randomQuote.year !== undefined){
-    innerHTML += "<span class=\"year\">" + randomQuote.year +"</span>";
-  }
-
-  innerHTML += "</p>";
-
-  //replace innerHTML of div with id "quote-box"
-  document.getElementById('quote-box').innerHTML = innerHTML;
-}
-
 //Generate a random nunber 0-255
 function getRandomRGBNumber () {
   return Math.floor(Math.random() * 256);
@@ -94,7 +63,46 @@ function getRandomRGBColor () {
   return color;
 }
 
+//Generate a random quote from the quotes array then display it on screen.  Also, change the background color of the body
+function getRandomQuote () {
+  var randomNum = Math.floor(Math.random() * quotes.length);
+  return quotes[randomNum];
+}
+
+//Display a random quote on screen
+function printQuote() {
+  //retrieve random quote object from quotes array
+  var randomQuote = getRandomQuote();
+  //begin buidling html string
+  var html = "<p class=\"quote\">";
+
+  //continue building HTML string
+  html += randomQuote.quote + "</p>";
+  html += "<p class=\"source\">" + randomQuote.source;
+
+  //use conditionals to revent null properties from displaying on screen
+  if(randomQuote.citation !== null && randomQuote.citation !== undefined){
+    html += "<span class=\"citation\">" + randomQuote.citation + "</span>";
+  }
+  if(randomQuote.year !== null && randomQuote.year !== undefined){
+    html += "<span class=\"year\">" + randomQuote.year +"</span>";
+  }
+  if(randomQuote.category !== null && randomQuote.category !== undefined) {
+    html += "<p class=\"category\">" + randomQuote.category + "</p>";
+  }
+
+  html += "</p>";
+
+  //replace innerHTML of div with id "quote-box"
+  document.getElementById('quote-box').innerHTML = html;
+  //change background color of html body
+  document.querySelector('body').style.background = getRandomRGBColor();
+
+}
+
 /***************************execute program**********************************/
 
 //generate new quote when "show another quote" button is clicked
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
+//new quote will appear automatically after 20000 miliseconds
+window.setInterval(printQuote,20000);
