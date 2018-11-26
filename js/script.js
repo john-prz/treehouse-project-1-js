@@ -1,24 +1,8 @@
-/******************************************
-Treehouse Techdegree:
-FSJS project 1 - A Random Quote Generator
-******************************************/
+// A Random Quote Generator
 
-// Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
-
-
-/***
-  Create the array of quote objects and name it `quotes`.
-  Add at least five quote objects to the `quotes` array.
-  Give each quote object a `quote` and `source` property.
-
-  Recommended:
-    - Add at least one `year` and/or `citation` property to at least one
-      quote object.
-***/
-
-//quotes variable declaration
+//global variable declarations//
 var quotes = [
-  { quote: "The expedient path may be fast and simple. That doesn’t make it the right path.",
+  { quote: "The expedient path may be fast and simple. That doesn’t make it the right path.",
     source: "Samara",
     citation: "Mass Effect 2",
     year: 2010,
@@ -56,20 +40,39 @@ var quotes = [
   },
   { quote: "And now these three remain: faith, hope and love. But the greatest of these is love.",
     source: "1 Corinthians 13:13",
-    citation: "Bible",
+    citation: "The Bible",
     year: null,
     category: "Faith"
 }];
 
+//function declarations//
 
-/***
-  Create the `getRandomQuote` function to:
-   - generate a random number
-   - use the random number to `return` a random quote object from the
-     `quotes` array.
-***/
+//function to retrieve a random quote from the quotes array using the length of the array
+function getRandomQuote () {
+  var randomNum = Math.floor(Math.random() * quotes.length);
+  return quotes[randomNum];
+}
 
 
+function printQuote() {
+  var randomQuote = getRandomQuote();
+  var innerHTML = "<p class=\"quote\">";
+
+  innerHTML += randomQuote.quote + "</p>";
+  innerHTML += "<p class=\"source\">" + randomQuote.source;
+
+  if(randomQuote.citation !== null && randomQuote.citation !== undefined){
+    innerHTML += "<span class=\"citation\">" + randomQuote.citation + "</span>";
+  }
+  if(randomQuote.year !== null && randomQuote.year !== undefined){
+    innerHTML += "<span class=\"year\">" + randomQuote.year +"</span>";
+  }
+
+  innerHTML += "</p>";
+
+  document.getElementById('quote-box').innerHTML = innerHTML;
+
+}
 
 
 /***
