@@ -63,17 +63,17 @@ function getRandomRGBColor () {
   return color;
 }
 
-//Generate a random quote from the quotes array then display it on screen.  Also, change the background color of the body
+//Generate a random quote from the quotes array
 function getRandomQuote () {
   var randomNum = Math.floor(Math.random() * quotes.length);
   return quotes[randomNum];
 }
 
-//Display a random quote on screen
+//Display a random quote on screen,  Also, change the background color of the body
 function printQuote() {
   //retrieve random quote object from quotes array
   var randomQuote = getRandomQuote();
-  //begin buidling html string
+  //begin building the html string
   var html = "<p class=\"quote\">";
 
   //continue building HTML string
