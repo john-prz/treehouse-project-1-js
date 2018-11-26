@@ -1,6 +1,6 @@
 // A Random Quote Generator
 
-//global variable declarations//
+/***********************global variable declarations***************************/
 var quotes = [
   { quote: "The expedient path may be fast and simple. That doesn’t make it the right path.",
     source: "Samara",
@@ -45,22 +45,26 @@ var quotes = [
     category: "Faith"
 }];
 
-//function declarations//
+/*************************function declarations****************************/
 
-//function to retrieve a random quote from the quotes array using the length of the array
+//Generate a random quote from the quotes array using the length of the array
 function getRandomQuote () {
   var randomNum = Math.floor(Math.random() * quotes.length);
   return quotes[randomNum];
 }
 
-
+//Display a random quote on screen
 function printQuote() {
+  //retrieve random quote object from quotes array
   var randomQuote = getRandomQuote();
+  //begin buidling html string
   var innerHTML = "<p class=\"quote\">";
 
+  //continue building HTML string
   innerHTML += randomQuote.quote + "</p>";
   innerHTML += "<p class=\"source\">" + randomQuote.source;
 
+  //use conditionals to revent null properties from displaying on screen
   if(randomQuote.citation !== null && randomQuote.citation !== undefined){
     innerHTML += "<span class=\"citation\">" + randomQuote.citation + "</span>";
   }
@@ -70,32 +74,27 @@ function printQuote() {
 
   innerHTML += "</p>";
 
+  //replace innerHTML of div with id "quote-box"
   document.getElementById('quote-box').innerHTML = innerHTML;
-
 }
 
+//Generate a random nunber 0-255
+function getRandomRGBNumber () {
+  return Math.floor(Math.random() * 256);
+}
 
-/***
-  Create the `printQuote` function to:
-   - call the `getRandomQuote` function and assign it to a variable.
-   - use the properties of the quote object stored in the variable to
-     create your HTML string.
-   - use conditionals to make sure the optional properties exist before
-     they are added to the HTML string.
-   - set the `innerHTML` of the `quote-box` div to the HTML string.
-***/
+//Generate a random RGB color
+function getRandomRGBColor () {
+  var color = "rgb("
 
+  color += getRandomRGBNumber() + ", ";
+  color += getRandomRGBNumber() + ", ";
+  color += getRandomRGBNumber() +")";
 
+  return color;
+}
 
+/***************************execute program**********************************/
 
-/***
-  When the "Show another quote" button is clicked, the event listener
-  below will be triggered, and it will call, or "invoke", the `printQuote`
-  function. So do not make any changes to the line of code below this
-  comment.
-***/
-
+//generate new quote when "show another quote" button is clicked
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
